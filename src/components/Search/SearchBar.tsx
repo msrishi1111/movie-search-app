@@ -1,12 +1,14 @@
 import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSearchResults } from '../store/searchSlice';
-import { getMoviesBySearch } from '../network/api';
+import { setSearchResults } from '../../store/searchSlice';
+import { getMoviesBySearch } from '../../network/api';
 import debounce from 'lodash/debounce';
+import { useNavigate } from 'react-router-dom';
 import './SearchComponent.css';
 
 const SearchComponent = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const inputRef = useRef<string | null>(null);
 
     const debouncedSearch = useCallback(
@@ -14,7 +16,15 @@ const SearchComponent = () => {
             if (inputRef.current !== query) return;
             getMoviesBySearch(query, 1)
                 .then((response) => {
-                    dispatch(setSearchResults({ results: response.results, totalResults: response.total_results, page: response.page, totalPages: response.total_pages, query: query }));
+                    dispatch(
+                        setSearchResults({
+                            results: response.results,
+                            totalResults: response.total_results,
+                            page: response.page,
+                            totalPages: response.total_pages,
+                            query: query,
+                        })
+                    );
                 })
                 .catch((error) => {
                     console.error('Error fetching movies:', error);
@@ -28,8 +38,9 @@ const SearchComponent = () => {
         inputRef.current = e.target.value;
         if (value !== '') {
             debouncedSearch(value);
-        }
-        else {
+            navigate('/search');
+        } else {
+            navigate('/');
             dispatch(setSearchResults({ results: [], totalResults: 0, page: 0, totalPages: 0, query: '' })); // Clear search
         }
     };

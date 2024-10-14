@@ -16,8 +16,8 @@ export const getTrendingMovies = async () => {
     });
 };
 
-export const getRecentMovies = async (page) => {
-    query.get(`/3/movie/now_playing?page=${page}`).then((response) => {
+export const getRecentlyReleasedMovies = async () => {
+    return query.get(`/3/movie/now_playing?page=1`).then((response) => {
         return response.data;
     }).catch((error) => {
         throw error;

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MovieCard from "./MovieCard";
+import MovieCard from "../MovieCard/MovieCard";
 import "./SearchResults.css";
-import { setFetchMoreResults } from "../store/searchSlice";
-import { getMoviesBySearch } from "../network/api";
+import { setFetchMoreResults } from "../../store/searchSlice";
+import { getMoviesBySearch } from "../../network/api";
 
 const SearchResults: React.FC = () => {
     const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const SearchResults: React.FC = () => {
             {searchResults.length > 0 && <h2 className="searchResultText">{`Results for "${query}"`}</h2>}
             <div className="searchResults">
                 {searchResults.map((movie: any) => (
-                    <MovieCard movie={movie} key={movie.id} />
+                    <MovieCard movie={movie} key={movie.id} onRemoveFavourite={() => { }} />
                 ))}
             </div>
             <div ref={loader} className="loading-indicator">

@@ -1,0 +1,72 @@
+.recently-released-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s;
+    width: 240px;
+}
+
+.recently-released-card:hover {
+    transform: scale(1.05);
+}
+
+.recently-released-poster {
+    width: 100%;
+    height: 360px;
+}
+
+.recently-released-info {
+    padding: 16px;
+    padding-top: 4px;
+    height: 160px;
+}
+
+.recently-released-title {
+    font-size: 20px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.recently-released-rating {
+    display: block;
+    margin: 8px 0;
+    color: #666;
+}
+
+.recently-released-release-date {
+    color: #545454;
+}
+
+.recently-released-adult {
+    font-size: 12px;
+}
+
+@media screen and (max-width: 600px) {
+    .recently-released-card {
+        width: 140px;
+    }
+    .recently-released-poster {
+        height: 210px;
+    }
+    .recently-released-info {
+        height: auto;
+        padding: 4px 8px;
+    }
+    .recently-released-title {
+        font-size: 14px;
+    }
+    .recently-released-rating {
+        font-size: 10px;
+    }
+    .recently-released-adult {
+        font-size: 10px;
+    }
+    .recently-released-release-date {
+        font-size: 10px;
+    }
+}

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './MovieCard.css'; // Ensure this CSS file exists
+import './MovieCard.css';
+import { IMDB_STRING } from '../../constants';
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, onRemoveFavourite }) => {
     const { id, title, overview, release_date, vote_average, poster_path } = movie;
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-        if (favorites.includes(id)) {
+        const isFavorited = favorites.some((favMovie) => favMovie.id === id);
+        if (isFavorited) {
             setIsFavorite(true);
         }
     }, [id]);
@@ -15,13 +17,12 @@ const MovieCard = ({ movie }) => {
     const handleFavoriteToggle = () => {
         const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
         if (isFavorite) {
-            // Remove from favorites
-            const updatedFavorites = favorites.filter(favId => favId !== id);
+            const updatedFavorites = favorites.filter((favMovie) => favMovie.id !== id);
             localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
             setIsFavorite(false);
+            onRemoveFavourite();
         } else {
-            // Add to favorites
-            favorites.push(id);
+            favorites.push(movie);
             localStorage.setItem('favorites', JSON.stringify(favorites));
             setIsFavorite(true);
         }
@@ -30,7 +31,7 @@ const MovieCard = ({ movie }) => {
     return (
         <div className="movie-card">
             <button className="favorite-button" onClick={handleFavoriteToggle}>
-                {isFavorite ? <img className="favourite" src="/favorite.svg" /> : <img className="favourite" src="/not-favourite.svg" />}
+                {isFavorite ? <img className="favourite" src="/favorite.svg" alt="Unfavorite" /> : <img className="favourite" src="/not-favourite.svg" alt="Favorite" />}
             </button>
             <div className="movie-poster-wrapper">
                 <img
@@ -42,7 +43,7 @@ const MovieCard = ({ movie }) => {
             <div className="movie-info">
                 <div className="movie-details">
                     <span className="movie-release-date">{new Date(release_date).getFullYear()}</span>
-                    <span className="movie-rating">{vote_average ? `IMDb: ${vote_average.toFixed(1)} ⭐` : "NA"}</span>
+                    <span className="movie-rating">{vote_average ? `${IMDB_STRING} ${vote_average.toFixed(1)} ⭐` : "NA"}</span>
                 </div>
                 <h3 className="movie-title">{title}</h3>
                 <p className="movie-overview">{overview}</p>

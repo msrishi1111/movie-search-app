@@ -1,0 +1,22 @@
+.recently-released-container {
+    padding: 20px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+}
+
+.recentlyReleasedIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.recently-released-heading {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.carousel {
+    margin-top: 20px;
+}
