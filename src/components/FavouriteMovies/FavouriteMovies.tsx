@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import "./FavouriteMovies.css";
+import { Movie } from '../types';
+import { FAVOURITE_MOVIES_TEXT, NO_FAVOURITE_MOVIES_TEXT } from "../../constants";
 
 const FavoriteMovies: React.FC = () => {
-    const [favoriteMovies, setFavoriteMovies] = useState<any[]>([]);
+    const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
 
     const fetchFavoriteMovies = () => {
         const storedFavorites = localStorage.getItem("favorites");
         if (storedFavorites) {
-            setFavoriteMovies(JSON.parse(storedFavorites));
+            setFavoriteMovies(JSON.parse(storedFavorites) as Movie[]);
         }
     };
 
@@ -17,25 +19,24 @@ const FavoriteMovies: React.FC = () => {
     }, []);
 
     const handleRemoveFavorite = () => {
-        const updatedFavorites = localStorage.getItem("favorites");
-        updatedFavorites && setFavoriteMovies(JSON.parse(updatedFavorites));
+        fetchFavoriteMovies();
     };
 
     return (
         <div className="favoriteMoviesContainer">
-            <h2 className="favoriteMoviesText">Your Favorite Movies</h2>
+            <h2 className="favoriteMoviesText">{FAVOURITE_MOVIES_TEXT}</h2>
             {favoriteMovies.length > 0 ? (
                 <div className="favoriteMoviesList">
-                    {favoriteMovies.map((movie: any) => (
+                    {favoriteMovies.map(({ id, ...movieProps }) => (
                         <MovieCard
-                            movie={movie}
-                            key={movie.id}
+                            key={id}
+                            movie={{ id, ...movieProps }}
                             onRemoveFavourite={handleRemoveFavorite}
                         />
                     ))}
                 </div>
             ) : (
-                <p className="favoriteMoviesText">You have no favorite movies saved.</p>
+                <p className="favoriteMoviesText">{NO_FAVOURITE_MOVIES_TEXT}</p>
             )}
         </div>
     );

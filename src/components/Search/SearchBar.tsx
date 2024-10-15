@@ -6,13 +6,13 @@ import debounce from 'lodash/debounce';
 import { useNavigate } from 'react-router-dom';
 import './SearchComponent.css';
 
-const SearchComponent = () => {
+const SearchComponent: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const inputRef = useRef<string | null>(null);
 
     const debouncedSearch = useCallback(
-        debounce((query) => {
+        debounce((query: string) => {
             if (inputRef.current !== query) return;
             getMoviesBySearch(query, 1)
                 .then((response) => {
@@ -35,13 +35,13 @@ const SearchComponent = () => {
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        inputRef.current = e.target.value;
-        if (value !== '') {
+        inputRef.current = value;
+        if (value) {
             debouncedSearch(value);
             navigate('/search');
         } else {
             navigate('/');
-            dispatch(setSearchResults({ results: [], totalResults: 0, page: 0, totalPages: 0, query: '' })); // Clear search
+            dispatch(setSearchResults({ results: [], totalResults: 0, page: 0, totalPages: 0, query: '' }));
         }
     };
 

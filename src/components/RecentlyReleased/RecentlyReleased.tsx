@@ -31,7 +31,7 @@ export const RecentlyReleased: React.FC = () => {
                     items={recentlyReleasedMovies}
                     visibleCard={7}
                     cardWidth={cardWidth}
-                    renderItem={(movie, index) => <RecentlyReleasedCard key={movie.id} movie={movie} index={index} />}
+                    renderItem={(movie) => <RecentlyReleasedCard key={movie.id} movie={movie} />}
                 />
             )}
         </div>

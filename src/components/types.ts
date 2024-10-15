@@ -5,6 +5,8 @@ export type Movie = {
     poster_path: string;
     adult: boolean;
     rank?: number;
+    id: number;
+    overview: string;
 }
 
 export type TrendingCardProps = {

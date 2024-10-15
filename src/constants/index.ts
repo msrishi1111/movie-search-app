@@ -4,4 +4,6 @@ export const SUITABLE_FOR_ALL_STRING = 'Rated: Suitable for All';
 export const FAVORITES_STORAGE_KEY = 'favorites';
 export const TRENDING_STORAGE_KEY = 'trending';
 export const TRENDING_MOVIES_TITLE = 'Trending Movies';
-export const RECENTLY_RELEASED_MOVIES_TITLE = 'Recently Released';   
+export const RECENTLY_RELEASED_MOVIES_TITLE = 'Recently Released';
+export const NO_FAVOURITE_MOVIES_TEXT = 'You have no favorite movies saved.';
+export const FAVOURITE_MOVIES_TEXT = "Your Favorite Movies";

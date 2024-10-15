@@ -35,11 +35,11 @@
 .recently-released-rating {
     display: block;
     margin: 8px 0;
-    color: #666;
+    color: #3f3f3f;
 }
 
 .recently-released-release-date {
-    color: #545454;
+    color: #3f3f3f;
 }
 
 .recently-released-adult {

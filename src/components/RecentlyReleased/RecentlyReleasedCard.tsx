@@ -1,7 +1,6 @@
-import React from 'react';
 import './RecentlyReleasedCard.css';
 
-const RecentlyReleasedCard = ({ movie, index }) => {
+const RecentlyReleasedCard = ({ movie }) => {
     const { title, release_date, vote_average, poster_path, adult } = movie;
 
     return (

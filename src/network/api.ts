@@ -1,6 +1,7 @@
 import query from './query';
 
 export const getMoviesBySearch = async (searchTerm, page) => {
+    console.log("cscs")
     return query.get(`/3/search/movie?query=${searchTerm}&include_adult=false&language=en-US&page=${page}`).then((response) => {
         return response.data;
     }).catch((error) => {
